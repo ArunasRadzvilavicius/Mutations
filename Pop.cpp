@@ -13,7 +13,7 @@ Population::Population(){
 }
 
 Population::Population(int Nv, int Mv, int Kv, double muv, int Cv, double Rv, double Lv) {
-	
+	    
 	N = Nv;
 	M = Mv;
 	K = Kv;
@@ -103,6 +103,7 @@ void Population::Mix(){
 	if (L>0){
 		while (i<N){
 			int l = gsl_ran_poisson (rng, L);
+			if (l>M) {l=M;}
 			cl1 = Pop[i];
 			cl2 = Pop[i+1];
 			random_shuffle(cl1.begin(), cl1.end());
