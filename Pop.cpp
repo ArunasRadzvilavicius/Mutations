@@ -24,7 +24,7 @@ Population::Population(int Nv, int Mv, int Kv, double muv, int Cv, double Rv, do
 	assert(C<=M);
 	assert(R<K);
 	double mu0 = muv;	// mutation rate per genome per generation
-	mu = mu0 / (1);	// mutation rate per site per generation
+	mu = mu0 / (1);	// mutation rate per genome per generation
 	s = 0.05;			// fitness contribution at the lowest level
 	c = 1.0;			// fitness contrbution one level up
 	Pop = vector<cell> (N);
