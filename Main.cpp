@@ -8,7 +8,9 @@ int main(int argc, char* argv[]) {
 	int C = atoi(argv[2]);
 	double R = atof(argv[3]);
 	double L = atof(argv[4]);
-	Population Pop(N, 20, 100, 1.0, C, R, L);
-	Pop.Evolve(25000);
+	int K = atoi(argv[5]);
+	Population Pop(N, 10, K, 0.5, C, R, L);
+	Pop.Evolve(100000);
+	cout << Pop.NFixed() << endl;
 	return 0;
 }
