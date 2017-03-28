@@ -43,7 +43,7 @@ Population::Population(int Nv, int Mv, int Kv, double muv, int Cv, double Rv, do
 
 void Population::Evolve(int Gv){
 	for (int i=0;i<Gv;i++) {
-		//cout <<MeanMut()<<" "<<BestClass()<<" "<<NFixed()<<" "<<HLLC()<<" "<<HLLC1()<<endl;
+		cout <<MeanMut()<<" "<<BestClass()<<" "<<NFixed()<<" "<<HLLC()<<" "<<HLLC1()<<endl;
 		Mutate();
 		Mix();
 		Recombine();
@@ -69,7 +69,7 @@ void Population::Selection(){
 			int nmut = accumulate(Pop[i][j].begin(), Pop[i][j].end(), 0);
 			mfit = mfit + pow(1-s, nmut);
 		}
-		Fits[i] = 1.0 - c*pow(1.0 - mfit/M,1.0);
+		Fits[i] = mfit/(double)M;
 	}
 	vector<int> S = WS(Fits, N);
 	vector<cell> nPop(0);
@@ -178,6 +178,26 @@ vector<int> Population::WS(vector<double> weights, int Rw){
 	}
 	return Lw;
 }
+
+vector<int> Population::WSS(vector<double> weights, int Nw){
+	//sort(weights.begin(),weights.end());
+	double total = accumulate(weights.begin(),weights.end(),0.0);
+	vector<int> Lw (0);
+	double S = 0;
+	double Sr;
+	for (int i=0;i<Nw;i++){
+		S = 0;
+		Sr = gsl_rng_uniform (rng) * total;
+		int j = 0;
+		while (S<Sr){
+			S += weights[j];
+			j += 1;
+		}
+		Lw.push_back(j-1);
+	}
+	return Lw;
+}
+
 
 void Population::PV(vector<int> v){
 	for (int i=0;i<v.size();i++){
