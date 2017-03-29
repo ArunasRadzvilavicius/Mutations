@@ -43,7 +43,7 @@ Population::Population(int Nv, int Mv, int Kv, double muv, int Cv, double Rv, do
 
 void Population::Evolve(int Gv){
 	for (int i=0;i<Gv;i++) {
-		cout <<MeanMut()<<" "<<BestClass()<<" "<<NFixed()<<" "<<HLLC()<<" "<<HLLC1()<<endl;
+		//cout <<MeanMut()<<" "<<BestClass()<<" "<<NFixed()<<" "<<HLLC()<<" "<<HLLC1()<<endl;
 		Mutate();
 		Mix();
 		Recombine();
