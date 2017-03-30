@@ -25,8 +25,7 @@ Population::Population(int Nv, int Mv, int Kv, double muv, int Cv, double Rv, do
 	assert(R<K);
 	double mu0 = muv;	// mutation rate per genome per generation
 	mu = mu0 / (1);	// mutation rate per genome per generation
-	s = 0.05;			// fitness contribution at the lowest level
-	c = 1.0;			// fitness contrbution one level up
+	s = 0.02;			// fitness contribution at the lowest level
 	Pop = vector<cell> (N);
 	cell cl(M);
 	group DNA(K);
@@ -43,7 +42,7 @@ Population::Population(int Nv, int Mv, int Kv, double muv, int Cv, double Rv, do
 
 void Population::Evolve(int Gv){
 	for (int i=0;i<Gv;i++) {
-		//cout <<MeanMut()<<" "<<BestClass()<<" "<<NFixed()<<" "<<HLLC()<<" "<<HLLC1()<<endl;
+		cout <<MeanMut()<<" "<<BestClass()<<" "<<NFixed()<<" "<<HLLC()<<" "<<HLLC1()<<endl;
 		Mutate();
 		Mix();
 		Recombine();
