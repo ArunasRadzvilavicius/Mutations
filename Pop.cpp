@@ -5,6 +5,7 @@
 #include <numeric>
 #include <cmath>
 #include <assert.h>
+#include <unistd.h>
 #include "Pop.h"
 
 using namespace std;
@@ -36,7 +37,7 @@ Population::Population(int Nv, int Mv, int Kv, double muv, int Cv, double Rv, do
 	const gsl_rng_type *T;
 	T = gsl_rng_mt19937;
 	rng = gsl_rng_alloc(T);
-	gsl_rng_set (rng, time(NULL));	
+	gsl_rng_set (rng, time(NULL)+getpid());	
 	
 }
 

@@ -9,7 +9,10 @@ int main(int argc, char* argv[]) {
 	double R = atof(argv[3]);
 	double L = atof(argv[4]);
 	int K = atoi(argv[5]);
-	Population Pop(N, 20, K, 0.1, C, R, L);
+	int M = atoi(argv[6]);
+	double mu = atof(argv[7]);
+	if (argc!=7) {cout << "Params N C R L K M mu" << endl;}
+	Population Pop(N, M, K, mu, C, R, L);
 	Pop.Evolve(100000);
 	//cout << Pop.NFixed() << endl;
 	return 0;
