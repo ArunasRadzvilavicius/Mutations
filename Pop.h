@@ -11,13 +11,14 @@ typedef vector<cell> clustergroup;
 class Population {
 	public:
 		Population();
-		Population(int,int,int,double,int,double,double);
+		Population(int,int,int,double,int,double,double,int);
 		void Evolve(int);
 		void Mutate();
 		void Selection();
 		void Division(int);
 		void Mix();
 		void Recombine();
+		void Bottleneck();
 		vector<int> WS(vector<double>, int);
 		vector<int> WSS(vector<double>, int);
 		void PV(vector<int>);
@@ -35,6 +36,7 @@ class Population {
 		int C; // segregating unit
 		double R; // recombination rate
 		double L; // mixing rate 2
+		int B; // bottleneck
 		double mu;
 		double s;
 		double c;

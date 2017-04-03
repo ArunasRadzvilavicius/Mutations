@@ -13,7 +13,7 @@ using namespace std;
 Population::Population(){
 }
 
-Population::Population(int Nv, int Mv, int Kv, double muv, int Cv, double Rv, double Lv) {
+Population::Population(int Nv, int Mv, int Kv, double muv, int Cv, double Rv, double Lv, int Bv) {
 	    
 	N = Nv;
 	M = Mv;
@@ -21,6 +21,7 @@ Population::Population(int Nv, int Mv, int Kv, double muv, int Cv, double Rv, do
 	C = Cv;				// size of a segregtaing unit in mtDNA's
 	R = Rv;				// mixing rate at the lowest level - number of alleles randomly exchanged
 	L = Lv;				// mixing rate at the higher level - number of llu randomly exchanged
+	B = Bv;
 	assert(M%C==0);
 	assert(C<=M);
 	assert(R<K);
@@ -48,6 +49,7 @@ void Population::Evolve(int Gv){
 		Mix();
 		Recombine();
 		Division(C);
+		Bottleneck();
 		Selection();
 	}
 }
@@ -116,6 +118,23 @@ void Population::Mix(){
 			Pop[i+1] = cl2;
 			i = i + 2;
 		}
+	}
+}
+
+void Population::Bottleneck(){
+	for (int i=0;i<N;i++){
+		cell cl = Pop[i];
+		cell clb(0);
+		random_shuffle(cl.begin(),cl.end());
+		copy(cl.begin(),cl.begin()+B,back_inserter(clb));
+		assert(clb.size()==B);
+		vector<double> wgs(B,1);
+		vector<int> S = WS(wgs, M);
+		cell cln(0);
+		for (int j=0;j<M;j++){
+			cln.push_back(clb[S[j]]);
+		}
+		Pop[i] = cln;
 	}
 }
 
